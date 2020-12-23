@@ -248,7 +248,7 @@ export class SimpleSurvey extends Component {
                         });
                     }}
                 />
-                {this.renderNavButtons()}
+                {/*this.renderNavButtons()*/}
             </View>
         );
     }
