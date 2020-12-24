@@ -155,15 +155,54 @@ export class SimpleSurvey extends Component {
         );
     }
 
-    renderNavButtons() {
+    renderNavButtons(typeSurvey) {
         const { navButtonContainerStyle } = this.props;
         if (this.props.renderPrevious || this.props.renderNext || this.props.renderFinished) {
-            return (
-                <View style={navButtonContainerStyle}>
-                    {this.renderPreviousButton && this.renderPreviousButton()}
-                    {this.renderFinishOrNextButton && this.renderFinishOrNextButton()}
-                </View>
-            );
+            switch (typeSurvey) {
+                case "info":
+                    return (
+                        <View style={navButtonContainerStyle}>
+                            {this.renderFinishOrNextButton && this.renderFinishOrNextButton()}
+                        </View>
+                    );
+                case "selectionGroup":
+                    return (
+                        <View style={navButtonContainerStyle}>
+                            {this.renderPreviousButton && this.renderPreviousButton()}
+                        </View>
+                    ); 
+                case "textInput":
+                    return (
+                        <View style={navButtonContainerStyle}>
+                            {this.renderPreviousButton && this.renderPreviousButton()}
+                            {this.renderFinishOrNextButton && this.renderFinishOrNextButton()}
+                        </View>
+                    );   
+                case "numeric":
+                    return (
+                        <View style={navButtonContainerStyle}>
+                            {this.renderPreviousButton && this.renderPreviousButton()}
+                            {this.renderFinishOrNextButton && this.renderFinishOrNextButton()}
+                        </View>
+                    );   
+                    
+                case "multipleSelectionGroup":
+                    return (
+                        <View style={navButtonContainerStyle}>
+                            {this.renderPreviousButton && this.renderPreviousButton()}
+                            {this.renderFinishOrNextButton && this.renderFinishOrNextButton()}
+                        </View>
+                    );      
+
+                default:
+                    return (
+                        <View style={navButtonContainerStyle}>
+                            {this.renderPreviousButton && this.renderPreviousButton()}
+                            {this.renderFinishOrNextButton && this.renderFinishOrNextButton()}
+                        </View>
+                    );
+            }
+
         }
         return;
     }
@@ -248,7 +287,7 @@ export class SimpleSurvey extends Component {
                         });
                     }}
                 />
-                {/*this.renderNavButtons()*/}
+                {this.renderNavButtons("selectionGroup")}
             </View>
         );
     }
@@ -312,7 +351,7 @@ export class SimpleSurvey extends Component {
                         });
                     }}
                 />
-                {this.renderNavButtons()}
+                {this.renderNavButtons("multipleSelectionGroup")}
             </View>
         );
     }
@@ -353,7 +392,7 @@ export class SimpleSurvey extends Component {
                     placeholderText,
                     this.props.autoAdvance ? this.autoAdvance.bind(this) : null
                 )}
-                {this.renderNavButtons()}
+                {this.renderNavButtons("numeric")}
             </View>
         );
     }
@@ -382,7 +421,7 @@ export class SimpleSurvey extends Component {
                 placeholderText,
                 this.props.autoAdvance ? this.autoAdvance.bind(this) : null
             )}
-            {this.renderNavButtons()}
+            {this.renderNavButtons("textInput")}
         </View>
         );
     }
@@ -395,7 +434,7 @@ export class SimpleSurvey extends Component {
 
         return (<View style={containerStyle}>
             {renderInfo(questionText)}
-            {this.renderNavButtons()}
+            {this.renderNavButtons("info")}
         </View>
         );
     }
