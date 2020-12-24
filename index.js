@@ -31,6 +31,7 @@ export class SimpleSurvey extends Component {
         renderFinished: PropTypes.func,
         renderInfo: PropTypes.func,
         autoAdvance: PropTypes.bool,
+        onInit: PropTypes.func,
     };
 
     constructor(props) {
@@ -160,6 +161,8 @@ export class SimpleSurvey extends Component {
         if (this.props.renderPrevious || this.props.renderNext || this.props.renderFinished) {
             switch (typeSurvey) {
                 case "info":
+                    const currentQuestion = this.state.currentQuestionIndex;
+                    this.props.onInit(currentQuestion);
                     return (
                         <View style={navButtonContainerStyle}>
                             {this.renderFinishOrNextButton && this.renderFinishOrNextButton()}
