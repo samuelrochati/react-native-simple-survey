@@ -159,10 +159,10 @@ export class SimpleSurvey extends Component {
     renderNavButtons(typeSurvey) {
         const { navButtonContainerStyle } = this.props;
         if (this.props.renderPrevious || this.props.renderNext || this.props.renderFinished) {
+            const currentQuestion = this.state.currentQuestionIndex;
+            this.props.onInit(currentQuestion);
             switch (typeSurvey) {
                 case "info":
-                    const currentQuestion = this.state.currentQuestionIndex;
-                    this.props.onInit(currentQuestion);
                     return (
                         <View style={navButtonContainerStyle}>
                             {this.renderFinishOrNextButton && this.renderFinishOrNextButton()}
